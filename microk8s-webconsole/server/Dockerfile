@@ -12,6 +12,7 @@ RUN apt-get install nodejs -y
 
 RUN (npm install)
 RUN npm install ssh2
+RUN npm install dotenv
 
 RUN apt install openssh-server -y
 ENV USER root

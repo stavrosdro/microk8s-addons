@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { promisify } from 'util';
 import { exec } from 'child_process';
-import { Client } from 'ssh2'
+import { Client } from 'ssh2';
 
 const exec_promise = promisify(exec);
 
-const pass = 'mypassword';
-let username = 'myusername';
-let host = '172.17.0.1';
+const dotenv = require('dotenv');
+dotenv.config();
+const pass = process.env.HOST_PASSWORD;
+let username = process.env.HOST_USERNAME;
+let host = process.env.HOST_IP;
 
 function execute_over_ssh(cmd: string): Promise<{ stdout: string; stderr: string; }> {
   return new Promise<{ stdout: string; stderr: string; }>((resolve, reject) => {
