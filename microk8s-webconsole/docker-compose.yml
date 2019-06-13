@@ -1,0 +1,15 @@
+version: '3'
+services:
+  server:
+    container_name: server-docker-node
+    build: ./server/
+    ports:
+      - 3000:3000
+    links:
+      - ui
+  ui:
+    container_name: ui-docker-node
+    build: ./ui/
+    network_mode: host
+    ports: 
+      - 4200:4200
