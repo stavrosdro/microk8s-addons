@@ -2,10 +2,8 @@ version: '3'
 services:
   server:
     container_name: server-docker-node
-    environment:
-      HOST_PASSWORD: ${HOST_PASSWORD}
-      HOST_USERNAME: ${HOST_USERNAME}
-      HOST_IP: ${HOST_IP}
+    volumes:
+      - ./myvolume:/myvolume
     build: ./server/
     ports:
       - 3000:3000

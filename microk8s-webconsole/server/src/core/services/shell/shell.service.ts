@@ -5,11 +5,11 @@ import { Client } from 'ssh2';
 
 const exec_promise = promisify(exec);
 
-const dotenv = require('dotenv');
-dotenv.config();
-const pass = process.env.HOST_PASSWORD;
-let username = process.env.HOST_USERNAME;
-let host = process.env.HOST_IP;
+const configFilePath = "/myvolume/env.json"
+const config = JSON.parse(require('fs').readFileSync(configFilePath));
+const pass = config.HOST_PASSWORD;
+let username = config.HOST_USERNAME;
+let host = config.HOST_IP;
 
 function execute_over_ssh(cmd: string): Promise<{ stdout: string; stderr: string; }> {
   return new Promise<{ stdout: string; stderr: string; }>((resolve, reject) => {
